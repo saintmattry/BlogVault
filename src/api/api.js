@@ -1,15 +1,41 @@
+// import axios from "axios";
+
+// const API = axios.create({
+//   baseURL: "https://blog-vault-backend-1.onrender.com/api",
+//   headers: {
+//     "Content-Type": "application/json",
+//   },
+// });
+
+// API.interceptors.request.use((config) => {
+//   const token = localStorage.getItem("token");
+
+//   if (token) {
+//     config.headers.Authorization = `Bearer ${token}`;
+//   }
+
+//   return config;
+// });
+
+// export default API;
+
 import axios from "axios";
 
 const API = axios.create({
-   baseURL: import.meta.env.VITE_API_URL || 'http://localhost:5000/api',
+  baseURL: "https://blog-vault-backend-1.onrender.com/api",
+  headers: {
+    "Content-Type": "application/json",
+  },
 });
 
-API.interceptors.request.use((req) => {
+API.interceptors.request.use((config) => {
   const token = localStorage.getItem("token");
+
   if (token) {
-    req.headers.Authorization = `Bearer ${token}`;
+    config.headers.Authorization = `Bearer ${token}`;
   }
-  return req;
+
+  return config;
 });
 
 export default API;
